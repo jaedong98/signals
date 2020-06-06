@@ -2,13 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import itertools
 
-def plot_confusion_matrix(cm, classes, title, normalize=False, cmap=plt.cm.Blues):
+def plot_confusion_matrix(cm, classes, title, normalize=False, cmap=plt.cm.Blues, figsize=None):
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         # print("Normalized confusion matrix")
 
     # print(cm)
-    plt.figure(figsize=(12, 6))
+    if figsize is None:
+        figsize = (12, 6)
+
+    plt.figure(figsize=figsize)
     plt.imshow(cm, interpolation='nearest', cmap=cmap) #imshow displays data on a 2D raster
     plt.title(title)
     plt.colorbar()
@@ -26,3 +29,4 @@ def plot_confusion_matrix(cm, classes, title, normalize=False, cmap=plt.cm.Blues
     plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
+    plt.show()
